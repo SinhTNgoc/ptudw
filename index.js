@@ -10,14 +10,26 @@ let hbs = expressHbs.create({
   defaultLayout: "layout",
   layoutsDir: __dirname + "/views/layouts",
   partialsDir: __dirname + "/views/partials",
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+  },
 });
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
-
-//Define your roots here
-app.get("/", (req, res) => {
-  res.render("index");
+// Create DB
+app.get("/sync", (req, res) => {
+  let models = require("./models");
+  models.sequelize.sync().then(() => {
+    res.send("Database sync completed !");
+  });
 });
+//Define your roots here
+app.use("/", require("./routes/indexRouter"));
+app.use("/products", require("./routes/productRouter"));
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
+
 app.get("/:page", (req, res) => {
   let banners = {
     blog: "Our Blog",
@@ -35,6 +47,7 @@ app.get("/:page", (req, res) => {
   let page = req.params.page;
   res.render(page, { banner: banners[page] });
 });
+
 
 //Set server port and start server
 app.set("port", process.env.PORT || 9999);
