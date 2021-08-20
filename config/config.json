@@ -23,7 +23,7 @@
     "username": "heroku-postgres-username",
     "password": "heroku-postgres-password",
     "database": "heroku-postgres-database",
-    "host": "heroku-postgres-host",
+    "host": "ec2-54-159-35-35.compute-1.amazonaws.com",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
