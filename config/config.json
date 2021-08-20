@@ -20,10 +20,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "nrcdqjtzsoxgjm",
-    "password": "5931e0807bc67611ee9d962b68dc4ae7ff0513bd3e8ab9e0ec1ce433f8f7bfdb",
-    "database": "dqd4dsdj8qebe",
-    "host": "ec2-54-159-35-35.compute-1.amazonaws.com",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "aromadb",
+    "host": "localhost",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
