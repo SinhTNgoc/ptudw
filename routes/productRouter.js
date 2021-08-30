@@ -22,8 +22,20 @@ router.get("/", (req, res, next) => {
     })
     .then((data) => {
       res.locals.products = data;
+      // console.log(data);
+      // res.render("category");
+      let reviewController = require("../controllers/reviewController");
+      return reviewController.getTopProduct();
+    })
+    .then((data) => {
+      let topProducts = data.map((data) => {
+        return data.Product;
+      });
+      // console.log(topProducts);
+      res.locals.topProducts = topProducts;
       res.render("category");
     })
+
     .catch((error) => next(error));
 });
 router.get("/:id", (req, res) => {

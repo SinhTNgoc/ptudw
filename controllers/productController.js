@@ -28,5 +28,16 @@ controller.getAll = () => {
       .catch((err) => reject(new Error(err)));
   });
 };
-
+// controller.getTopProduct = () => {
+//   return new Promise((resolve, reject) => {
+//     Product.findAll({
+//       include: [{ model: models.Review}],
+//       attributes: ["id", "name", "imagepath", "price"],
+//     })
+//       .then((data) => {
+//         resolve(data);
+//       })
+//       .catch((err) => reject(new Error(err)));
+//   });
+// };
 module.exports = controller;
