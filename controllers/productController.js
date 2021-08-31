@@ -1,7 +1,8 @@
 let controller = {};
 let models = require("../models");
 let Product = models.Product;
-
+let Sequelize = require("sequelize");
+let Op = Sequelize.Op;
 controller.getTrendingProducts = () => {
   return new Promise((resolve, reject) => {
     Product.findAll({
@@ -16,12 +17,33 @@ controller.getTrendingProducts = () => {
       .catch((err) => reject(new Error(err)));
   });
 };
-controller.getAll = () => {
+controller.getAll = (query) => {
   return new Promise((resolve, reject) => {
-    Product.findAll({
+    let options = {
       include: [{ model: models.Category }],
       attributes: ["id", "name", "imagepath", "price"],
-    })
+      where: {
+        price: {
+          [Op.gte]: query.min,
+          [Op.lte]: query.max
+        }
+      },
+    };
+    if (query.category > 0) {
+      options.where.categoryId = query.category;
+    }
+    if (query.brand > 0) {
+      options.where.brandId = query.brand;
+    }
+    if (query.color > 0) {
+      options.include.push({
+        model: models.ProductColor,
+        attributes: [],
+        where: { colorId: query.color },
+      });
+    }
+
+    Product.findAll(options)
       .then((data) => {
         resolve(data);
       })
@@ -77,4 +99,5 @@ controller.getById = (id) => {
       .catch((err) => reject(new Error(err)));
   });
 };
+
 module.exports = controller;

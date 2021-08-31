@@ -7,10 +7,12 @@ controller.getTopProduct = () => {
     Review.findAll({
       where: {rating:5},
       include: [{ model: models.Product }],
-    //   attributes: ["id", "name", "imagepath"],
     })
       .then((data) => {
-        resolve(data);
+        let topProducts = data.map((data) => {
+          return data.Product;
+        });
+        resolve(topProducts);
       })
       .catch((error) => reject(new Error(error)));
   });

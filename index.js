@@ -31,6 +31,7 @@ app.get("/sync", (req, res) => {
 //Define your roots here
 app.use("/", require("./routes/indexRouter"));
 app.use("/products", require("./routes/productRouter"));
+
 // app.get("/", (req, res) => {
 //   res.render("index");
 // });
