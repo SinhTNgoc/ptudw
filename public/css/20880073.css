@@ -2,3 +2,13 @@
 .product_description_area .tab-content .total_rate .rating_list .list li a i.disabled {
     color: lightgray;
 }
+.single-search-product.fixheight {
+    height: 147px;
+   
+ }
+ /* .single-search-product.mb-xl-0 {
+    margin-bottom:8px !important;
+} */
+.single-search-product-wrapper.fixheight {
+    height: 147px;
+}
