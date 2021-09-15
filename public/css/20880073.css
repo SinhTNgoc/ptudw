@@ -1,14 +1,28 @@
 .review_item .media .media-body i.disabled,
-.product_description_area .tab-content .total_rate .rating_list .list li a i.disabled {
-    color: lightgray;
+.product_description_area
+  .tab-content
+  .total_rate
+  .rating_list
+  .list
+  li
+  a
+  i.disabled {
+  color: lightgray;
 }
 .single-search-product.fixheight {
-    height: 147px;
-   
- }
- /* .single-search-product.mb-xl-0 {
-    margin-bottom:8px !important;
-} */
+  height: 147px;
+}
+
 .single-search-product-wrapper.fixheight {
-    height: 147px;
+  height: 147px;
+}
+.product_count .reducedd {
+  bottom: 0px;
+  left: 100px;
+  transform: translateY(-50%);
+}
+.product_count .increasee {
+  top: 0;
+  left: 120px;
+  transform: translateY(50%);
 }

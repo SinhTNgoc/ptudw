@@ -9,6 +9,8 @@ controller.getTopProduct = () => {
       include: [{ model: models.Product }],
     })
       .then((data) => {
+        // let testData = JSON.parse(JSON.stringify(data));
+        // console.log(testData);
         let topProducts = data.map((data) => {
           return data.Product;
         });
