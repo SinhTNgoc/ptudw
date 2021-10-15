@@ -5,7 +5,8 @@ let Review = models.Review;
 controller.getTopProduct = () => {
   return new Promise((resolve, reject) => {
     Review.findAll({
-      where: {rating:5},
+      where: { rating: 5 },
+      limit: 12,
       include: [{ model: models.Product }],
     })
       .then((data) => {
