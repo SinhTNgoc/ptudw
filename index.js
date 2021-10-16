@@ -6,6 +6,7 @@ app.use(express.static(__dirname + "/public"));
 //Use view engine
 let helper = require("./controllers/helper");
 let expressHbs = require("express-handlebars");
+let paginateHelper = require("express-handlebars-paginate");
 let hbs = expressHbs.create({
   extname: "hbs",
   defaultLayout: "layout",
@@ -17,6 +18,7 @@ let hbs = expressHbs.create({
   helpers: {
     createStarList: helper.createStarList,
     createStars: helper.createStars,
+    createPagination: paginateHelper.createPagination,
   },
 });
 app.engine("hbs", hbs.engine);

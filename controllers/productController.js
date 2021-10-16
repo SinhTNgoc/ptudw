@@ -33,6 +33,11 @@ controller.getAll = (query) => {
     if (query.category > 0) {
       options.where.categoryId = query.category;
     }
+    if (query.search != "") {
+      options.where.name = {
+        [Op.iLike]: `%${query.search}%`,
+      };
+    }
     if (query.brand > 0) {
       options.where.brandId = query.brand;
     }
@@ -62,7 +67,7 @@ controller.getAll = (query) => {
           options.order = [["name", "ASC"]];
       }
     }
-    Product.findAll(options)
+    Product.findAndCountAll(options)
       .then((data) => {
         resolve(data);
       })

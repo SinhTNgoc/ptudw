@@ -32,7 +32,7 @@ router.get("/", (req, res, next) => {
 
   let categoryController = require("../controllers/categoryController");
   categoryController
-    .getAll()
+    .getAll(req.query)
     .then((data) => {
       res.locals.categories = data;
       let brandController = require("../controllers/brandController");
@@ -40,6 +40,7 @@ router.get("/", (req, res, next) => {
     })
     .then((data) => {
       res.locals.brands = data;
+     
       let colorController = require("../controllers/colorController");
       return colorController.getAll(req.query);
     })
@@ -49,7 +50,12 @@ router.get("/", (req, res, next) => {
       return productController.getAll(req.query);
     })
     .then((data) => {
-      res.locals.products = data;
+      res.locals.products = data.rows;
+      res.locals.pagination = {
+        page: parseInt(req.query.page),
+        limit: parseInt(req.query.limit),
+        totalRows: data.count
+      }
       // console.log("LENGTH:", data);
       let reviewController = require("../controllers/reviewController");
       return reviewController.getTopProduct();
