@@ -63,13 +63,15 @@
                 value="1"
                 title="Quantity:"
                 class="input-text qty"
+                readonly="true"
               />
               <button
-                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) && sst > 0) result.value--;return false;"
                 class="reducedd items-count"
                 type="button"
               ><i class="ti-minus"></i></button>
-              <a class="button primary-btn" href="#">Add to Cart</a>
+              <a class="button primary-btn add-to-cart text-white" data-id="{{id}} ">Add to
+                Cart</a>
             </div>
             <div class="card_area d-flex align-items-center">
               <a class="icon_btn" href="#"><i

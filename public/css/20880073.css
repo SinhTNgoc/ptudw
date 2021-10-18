@@ -26,3 +26,7 @@
   left: 120px;
   transform: translateY(50%);
 }
+.text-white:hover{
+  background: blue;
+  cursor: pointer;
+}
