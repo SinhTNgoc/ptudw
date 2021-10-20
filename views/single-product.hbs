@@ -225,8 +225,8 @@
                 <div class="col-md-12">
                   <div class="form-group form-inline">
                     <button onclick="removeReply()" type="button" class="close" aria-label="Close" id="closeButton">
-  <span aria-hidden="true">&times; &nbsp;</span>
-</button>
+                    <span aria-hidden="true">&times; &nbsp;</span>
+                    </button>
                     <label  for="" id="reply"></label>
                     <input
                       type="hidden"
@@ -311,46 +311,24 @@
               <div class="review_box">
                 <h4>Add a Review</h4>
                 <p>Your Rating:</p>
-                <ul class="list">
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
-                  <li><a href="#"><i class="fa fa-star"></i></a></li>
+                <ul class="list" id="star-list">
+                  <li><a><i class="fa fa-star"></i></a></li>
+                  <li><a><i class="fa fa-star"></i></a></li>
+                  <li><a><i class="fa fa-star"></i></a></li>
+                  <li><a><i class="fa fa-star"></i></a></li>
+                  <li><a><i class="fa fa-star disabled"></i></a></li>
                 </ul>
-                <p>Outstanding</p>
-                <form action="#/" class="form-contact form-review mt-3">
+                <p id="star-name">Outstanding</p>
+                <form action="/reviews" method="POST" class="form-contact form-review mt-3">
                   <div class="form-group">
-                    <input
-                      class="form-control"
-                      name="name"
-                      type="text"
-                      placeholder="Enter your name"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      name="email"
-                      type="email"
-                      placeholder="Enter email address"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      name="subject"
-                      type="text"
-                      placeholder="Enter Subject"
-                    />
+                    <input type="hidden" name="productId" value="{{id}}">
+                    <input type="hidden" name="rating" id="rating" value="0" >
                   </div>
                   <div class="form-group">
                     <textarea
                       class="form-control different-control w-100"
-                      name="textarea"
-                      id="textarea"
+                      name="message"
+                      
                       cols="30"
                       rows="5"
                       placeholder="Enter Message"
@@ -410,7 +388,50 @@
     $("#reply").html("");
     $("#parentCommentId").val("");
   }
-    $(document).ready(()=>{
+  
+    function checkStars() {
+      let rating = getRating(this);  
+      $("#rating").val(rating);
+      showStars(rating);
+    }
+    
+    function getRating(star){
+      let stars = $("#star-list i");
+      let i = 0;
+      for(i = 0; i<5;i++) {
+        if($(stars[i]).get(0)==star){
+          return (i+1);
+        }
+      }
+     return i;
+    }
+    function showStars(rating){
+      let stars = $("#star-list i");
+      let i = 0;
+      for(i=0; i<5; i++){
+        $(stars[i]).removeClass('disabled');
+      }
+      for(i=rating; i<5; i++){  
+        $(stars[i]).addClass('disabled');
+      }
+      let starNames =["Please rating this product!","Worst","Bad","Ok","Good","Outstanding"];
+      $("#star-name").html(starNames[rating]);
+
+    }
+    function highlightStars(){
+      let rating = getRating(this);  
+      showStars(rating);
+    }
+    function resetStars(){
+        let rating = $("#rating").val();
+        showStars(rating);
+    }
+      $(document).ready(()=>{
       $("#closeButton").hide();
+      $("#star-list i").on("click", checkStars);
+      $("#star-list i").on("mouseover", highlightStars);
+      $("#star-list i").on("mouseout", resetStars);
+      resetStars();
     })
+
 </script>
