@@ -40,7 +40,7 @@ router.get("/", (req, res, next) => {
     })
     .then((data) => {
       res.locals.brands = data;
-     
+
       let colorController = require("../controllers/colorController");
       return colorController.getAll(req.query);
     })
@@ -54,8 +54,8 @@ router.get("/", (req, res, next) => {
       res.locals.pagination = {
         page: parseInt(req.query.page),
         limit: parseInt(req.query.limit),
-        totalRows: data.count
-      }
+        totalRows: data.count,
+      };
       // console.log("LENGTH:", data);
       let reviewController = require("../controllers/reviewController");
       return reviewController.getTopProduct();
@@ -78,8 +78,17 @@ router.get("/:id", (req, res, next) => {
     })
     .then((topProducts) => {
       res.locals.topProducts = topProducts;
+      // res.render("single-product");
+    })
+    .then((product) => {
+      let reviewController = require("../controllers/reviewController");
+      return reviewController.getUserReviewProduct(1, req.params.id);
+    })
+    .then((review) => {
+      res.locals.userReview = review;
       res.render("single-product");
     })
+
     .catch((error) => next(error));
 });
 

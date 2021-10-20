@@ -322,7 +322,7 @@
                 <form action="/reviews" method="POST" class="form-contact form-review mt-3">
                   <div class="form-group">
                     <input type="hidden" name="productId" value="{{id}}">
-                    <input type="hidden" name="rating" id="rating" value="0" >
+                    <input type="hidden" name="rating" id="rating" value="{{../userReview.rating}}" >
                   </div>
                   <div class="form-group">
                     <textarea
@@ -332,7 +332,7 @@
                       cols="30"
                       rows="5"
                       placeholder="Enter Message"
-                    ></textarea>
+                    >{{../userReview.message}}</textarea>
                   </div>
                   <div class="form-group text-center text-md-right mt-3">
                     <button
@@ -394,7 +394,7 @@
       $("#rating").val(rating);
       showStars(rating);
     }
-    
+
     function getRating(star){
       let stars = $("#star-list i");
       let i = 0;
@@ -419,7 +419,8 @@
 
     }
     function highlightStars(){
-      let rating = getRating(this);  
+      let rating = getRating(this); 
+      console.log(rating) 
       showStars(rating);
     }
     function resetStars(){
