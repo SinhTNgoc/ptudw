@@ -48,7 +48,9 @@ controller.add = (review) => {
             for (let i = 0; i < product.Reviews.length; i++) {
               overallReview += product.Reviews[i].rating;
             }
-            overallReview = overallReview / product.Reviews.length;
+            overallReview = parseFloat(
+              overallReview / product.Reviews.length
+            ).toFixed(2);
             return models.Product.update(
               {
                 overallReview: overallReview,
